@@ -4,6 +4,7 @@ import GlobalStyle from "styles/GlobalStyle";
 
 import Header from "components/Header";
 import Banner from "components/Banner";
+import ShopBox from "components/ShopBox";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <GlobalStyle />
       <Header />
       <Banner />
+      <ShopBox />
     </div>
   );
 }
