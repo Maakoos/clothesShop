@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import arrowDownIcon from "icons/arrow_down.svg";
@@ -178,7 +179,7 @@ const ShopBox = () => {
 
         <ProductList>
           <li>
-            <ProductLink href="/">
+            <ProductLink as={Link} to="/details">
               <ProductImage
                 src="https://cdn.shopify.com/s/files/1/0245/6825/products/Mimi-romper-main_02_720x.jpg?v=1569128637"
                 alt=""
@@ -190,7 +191,7 @@ const ShopBox = () => {
           </li>
 
           <li>
-            <ProductLink href="/">
+            <ProductLink as={Link} to="/details">
               <ProductImage
                 src="https://cdn.shopify.com/s/files/1/0245/6825/products/Mimi-romper-main_02_720x.jpg?v=1569128637"
                 alt=""
@@ -202,7 +203,7 @@ const ShopBox = () => {
           </li>
 
           <li>
-            <ProductLink href="/">
+            <ProductLink as={Link} to="/details">
               <ProductImage
                 src="https://cdn.shopify.com/s/files/1/0245/6825/products/Mimi-romper-main_02_720x.jpg?v=1569128637"
                 alt=""
@@ -214,7 +215,7 @@ const ShopBox = () => {
           </li>
 
           <li>
-            <ProductLink href="/">
+            <ProductLink as={Link} to="/details">
               <ProductImage
                 src="https://cdn.shopify.com/s/files/1/0245/6825/products/Mimi-romper-main_02_720x.jpg?v=1569128637"
                 alt=""
@@ -226,7 +227,7 @@ const ShopBox = () => {
           </li>
 
           <li>
-            <ProductLink href="/">
+            <ProductLink as={Link} to="/details">
               <ProductImage
                 src="https://cdn.shopify.com/s/files/1/0245/6825/products/Mimi-romper-main_02_720x.jpg?v=1569128637"
                 alt=""
@@ -238,7 +239,7 @@ const ShopBox = () => {
           </li>
 
           <li>
-            <ProductLink href="/">
+            <ProductLink as={Link} to="/details">
               <ProductImage
                 src="https://cdn.shopify.com/s/files/1/0245/6825/products/Mimi-romper-main_02_720x.jpg?v=1569128637"
                 alt=""

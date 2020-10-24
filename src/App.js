@@ -1,19 +1,26 @@
 import React from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import GlobalStyle from "styles/GlobalStyle";
 
 import Header from "components/Header";
-import Banner from "components/Banner";
-import ShopBox from "components/ShopBox";
+import MainView from "views/MainView";
+// import ShoppingCart from "components/ShoppingCart";
+
+import DetailsItemView from "views/DetailsItemView";
 
 function App() {
   return (
-    <div className="App">
-      <GlobalStyle />
-      <Header />
-      <Banner />
-      <ShopBox />
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <GlobalStyle />
+        <Header />
+        <Switch>
+          <Route exact path="/" component={MainView} />
+          <Route path="/details/" component={DetailsItemView} />
+        </Switch>
+      </div>
+    </BrowserRouter>
   );
 }
 
