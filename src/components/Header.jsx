@@ -1,8 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
 
 import sprite from "icons/sprite.svg";
 import logoImg from "img/logo.png";
+
+import { switchShopCart } from "store/Actions";
 
 const Wrapper = styled.header`
   display: flex;
@@ -94,27 +97,40 @@ const InputLabel = styled.label`
   height: 25px;
 `;
 
-const Header = () => (
-  <Wrapper>
-    <TopBox>
-      <Form action="submit">
-        <InputLabel htmlFor="searchInput">
+const Header = () => {
+  const test = useSelector((store) => store);
+
+  const dispatch = useDispatch();
+
+  const handleClickShopCartSwitch = () => dispatch(switchShopCart());
+  return (
+    <Wrapper>
+      <TopBox>
+        <Form action="submit">
+          <InputLabel htmlFor="searchInput">
+            <Icon>
+              <use href={`${sprite}#search-24px`} />
+            </Icon>
+          </InputLabel>
+          <SearchInput type="text" id="searchInput" placeholder="Search" />
+        </Form>
+        <DeliveryInfo>Free delivery on orders over $60</DeliveryInfo>
+        <CartBtn onClick={handleClickShopCartSwitch}>
           <Icon>
-            <use href={`${sprite}#search-24px`} />
+            <use href={`${sprite}#shopping_cart-24px`} />
           </Icon>
-        </InputLabel>
-        <SearchInput type="text" id="searchInput" placeholder="Search" />
-      </Form>
-      <DeliveryInfo>Free delivery on orders over $60</DeliveryInfo>
-      <CartBtn>
-        <Icon>
-          <use href={`${sprite}#shopping_cart-24px`} />
-        </Icon>
-        0
-      </CartBtn>
-    </TopBox>
-    <MobileLogo src={logoImg} />
-  </Wrapper>
-);
+          0
+        </CartBtn>
+      </TopBox>
+      <MobileLogo src={logoImg} />
+    </Wrapper>
+  );
+};
+
+/* const mapStateToProps = (state) => {
+  const { cartIsOpen } = state;
+  console.log(cartIsOpen);
+  return { cartIsOpen };
+}; */
 
 export default Header;

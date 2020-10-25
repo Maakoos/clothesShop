@@ -1,7 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
 
 import arrowForwardIcon from "icons/arrow_forward.svg";
+
+import { switchShopCart } from "store/Actions";
 
 const Wrapper = styled.aside`
   position: fixed;
@@ -47,6 +50,7 @@ const CloseBtn = styled.button`
   font-size: 14px;
   font-family: inherit;
   border: none;
+  cursor: pointer;
 `;
 
 const CartList = styled.ul`
@@ -197,81 +201,87 @@ const CheckOutButton = styled(Button)`
   }
 `;
 
-const ShoppingCart = () => (
-  <Wrapper>
-    <CartHeader>
-      <Heading>My Cart</Heading>
-      <CloseBtn>Close</CloseBtn>
-    </CartHeader>
-    <CartList>
-      <CartItem>
-        <ItemImage
-          src="https://cdn.shopify.com/s/files/1/0245/6825/products/Mimi-romper-main_02_720x.jpg?v=1569128637"
-          alt=""
-        />
-        <ItemContentBox>
-          <ItemName>Carmel Dree S</ItemName>
-          <ItemPrice>$159.00</ItemPrice>
-          <QuantityBox>
-            <SubtractionBtn>−</SubtractionBtn>
-            <QuantityInput type="number" />
-            <AdditionBtn>+</AdditionBtn>
-          </QuantityBox>
-        </ItemContentBox>
-      </CartItem>
+const ShoppingCart = () => {
+  const dispatch = useDispatch();
 
-      <CartItem>
-        <ItemImage
-          src="https://cdn.shopify.com/s/files/1/0245/6825/products/Mimi-romper-main_02_720x.jpg?v=1569128637"
-          alt=""
-        />
-        <ItemContentBox>
-          <ItemName>Carmel Dree S</ItemName>
-          <ItemPrice>$159.00</ItemPrice>
-          <QuantityBox>
-            <SubtractionBtn>−</SubtractionBtn>
-            <QuantityInput type="number" />
-            <AdditionBtn>+</AdditionBtn>
-          </QuantityBox>
-        </ItemContentBox>
-      </CartItem>
+  const handleClickShopCartSwitch = () => dispatch(switchShopCart());
 
-      <CartItem>
-        <ItemImage
-          src="https://cdn.shopify.com/s/files/1/0245/6825/products/Mimi-romper-main_02_720x.jpg?v=1569128637"
-          alt=""
-        />
-        <ItemContentBox>
-          <ItemName>Carmel Dree S</ItemName>
-          <ItemPrice>$159.00</ItemPrice>
-          <QuantityBox>
-            <SubtractionBtn>−</SubtractionBtn>
-            <QuantityInput type="number" />
-            <AdditionBtn>+</AdditionBtn>
-          </QuantityBox>
-        </ItemContentBox>
-      </CartItem>
-    </CartList>
+  return (
+    <Wrapper>
+      <CartHeader>
+        <Heading>My Cart</Heading>
+        <CloseBtn onClick={handleClickShopCartSwitch}>Close</CloseBtn>
+      </CartHeader>
+      <CartList>
+        <CartItem>
+          <ItemImage
+            src="https://cdn.shopify.com/s/files/1/0245/6825/products/Mimi-romper-main_02_720x.jpg?v=1569128637"
+            alt=""
+          />
+          <ItemContentBox>
+            <ItemName>Carmel Dree S</ItemName>
+            <ItemPrice>$159.00</ItemPrice>
+            <QuantityBox>
+              <SubtractionBtn>−</SubtractionBtn>
+              <QuantityInput type="number" />
+              <AdditionBtn>+</AdditionBtn>
+            </QuantityBox>
+          </ItemContentBox>
+        </CartItem>
 
-    <AccoridonsBox>
-      <AditionalRemarks>
-        <TitleAccordion>Order Special Instructions</TitleAccordion>
-        <AditionalMessage />
-      </AditionalRemarks>
-      <AditionalRemarks>
-        <TitleAccordion>Discount Code</TitleAccordion>
-        <CodeInput type="text" placeholder="Enter Coupon Code" />
-      </AditionalRemarks>
-    </AccoridonsBox>
+        <CartItem>
+          <ItemImage
+            src="https://cdn.shopify.com/s/files/1/0245/6825/products/Mimi-romper-main_02_720x.jpg?v=1569128637"
+            alt=""
+          />
+          <ItemContentBox>
+            <ItemName>Carmel Dree S</ItemName>
+            <ItemPrice>$159.00</ItemPrice>
+            <QuantityBox>
+              <SubtractionBtn>−</SubtractionBtn>
+              <QuantityInput type="number" />
+              <AdditionBtn>+</AdditionBtn>
+            </QuantityBox>
+          </ItemContentBox>
+        </CartItem>
 
-    <TotalPriceBox>
-      <TotalPriceTitle>Total</TotalPriceTitle>
-      <TotalPriceValue>$159.00</TotalPriceValue>
-    </TotalPriceBox>
+        <CartItem>
+          <ItemImage
+            src="https://cdn.shopify.com/s/files/1/0245/6825/products/Mimi-romper-main_02_720x.jpg?v=1569128637"
+            alt=""
+          />
+          <ItemContentBox>
+            <ItemName>Carmel Dree S</ItemName>
+            <ItemPrice>$159.00</ItemPrice>
+            <QuantityBox>
+              <SubtractionBtn>−</SubtractionBtn>
+              <QuantityInput type="number" />
+              <AdditionBtn>+</AdditionBtn>
+            </QuantityBox>
+          </ItemContentBox>
+        </CartItem>
+      </CartList>
 
-    <Button>Continue Shopping</Button>
-    <CheckOutButton>Check Out</CheckOutButton>
-  </Wrapper>
-);
+      <AccoridonsBox>
+        <AditionalRemarks>
+          <TitleAccordion>Order Special Instructions</TitleAccordion>
+          <AditionalMessage />
+        </AditionalRemarks>
+        <AditionalRemarks>
+          <TitleAccordion>Discount Code</TitleAccordion>
+          <CodeInput type="text" placeholder="Enter Coupon Code" />
+        </AditionalRemarks>
+      </AccoridonsBox>
+
+      <TotalPriceBox>
+        <TotalPriceTitle>Total</TotalPriceTitle>
+        <TotalPriceValue>$159.00</TotalPriceValue>
+      </TotalPriceBox>
+
+      <Button>Continue Shopping</Button>
+      <CheckOutButton>Check Out</CheckOutButton>
+    </Wrapper>
+  );
+};
 
 export default ShoppingCart;
