@@ -67,7 +67,7 @@ const TabList = styled.ul`
 
 const TabItem = styled.li``;
 
-const Tabs = () => {
+const Tabs = ({ composition, description, wash }) => {
   const [tabName, setTabName] = useState("first");
 
   const handleSetTabVisible = (name) => setTabName(name);
@@ -77,15 +77,11 @@ const Tabs = () => {
       case "first":
         return (
           <TabContent>
-            <TabParagraph>
-              Show Me Your Mumu's Birdie Ruffle Dress features a delicate and
-              feminine floral print throughout, elastic off the shoulder
-              sleeves, and a lightweight chiffon fabrication. Fully lined.
-            </TabParagraph>
+            <TabParagraph>{description}</TabParagraph>
             <TabList>
               <TabItem>Made in USA</TabItem>
-              <TabItem>Dry Clean Only</TabItem>
-              <TabItem>100% Poly Chiffon</TabItem>
+              <TabItem>{wash}</TabItem>
+              <TabItem>{composition}</TabItem>
               <TabItem>
                 Model is 5ft 7 inches; Bust: 34”, Waist: 25”, Hips: 36”
               </TabItem>

@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 import arrowDownIcon from "icons/arrow_down.svg";
+
+import ProductItem from "components/ProductItem";
 
 const Wrapper = styled.main`
   padding: 0 15px;
@@ -108,7 +110,7 @@ const ProductList = styled.ul`
   }
 `;
 
-const ProductLink = styled.a`
+/* const ProductLink = styled.a`
   color: #000;
   text-decoration: none;
   cursor: pointer;
@@ -129,10 +131,12 @@ const ProductName = styled.p`
 
 const ProductPrice = styled.p`
   font-weight: 800;
-`;
+`; */
 
 const ShopBox = () => {
   const [openSelectList, setOpenSelectList] = useState(false);
+
+  const { shopProducts } = useSelector((store) => store);
 
   const selectListRef = useRef();
   const selectButtonRef = useRef();
@@ -178,77 +182,9 @@ const ShopBox = () => {
         </SelectBox>
 
         <ProductList>
-          <li>
-            <ProductLink as={Link} to="/details">
-              <ProductImage
-                src="https://cdn.shopify.com/s/files/1/0245/6825/products/Mimi-romper-main_02_720x.jpg?v=1569128637"
-                alt=""
-              />
-              <ProductCollection>Flynn Skye</ProductCollection>
-              <ProductName>Mimi Romper</ProductName>
-              <ProductPrice>$159.00</ProductPrice>
-            </ProductLink>
-          </li>
-
-          <li>
-            <ProductLink as={Link} to="/details">
-              <ProductImage
-                src="https://cdn.shopify.com/s/files/1/0245/6825/products/Mimi-romper-main_02_720x.jpg?v=1569128637"
-                alt=""
-              />
-              <ProductCollection>Flynn Skye</ProductCollection>
-              <ProductName>Mimi Romper</ProductName>
-              <ProductPrice>$159.00</ProductPrice>
-            </ProductLink>
-          </li>
-
-          <li>
-            <ProductLink as={Link} to="/details">
-              <ProductImage
-                src="https://cdn.shopify.com/s/files/1/0245/6825/products/Mimi-romper-main_02_720x.jpg?v=1569128637"
-                alt=""
-              />
-              <ProductCollection>Flynn Skye</ProductCollection>
-              <ProductName>Mimi Romper</ProductName>
-              <ProductPrice>$159.00</ProductPrice>
-            </ProductLink>
-          </li>
-
-          <li>
-            <ProductLink as={Link} to="/details">
-              <ProductImage
-                src="https://cdn.shopify.com/s/files/1/0245/6825/products/Mimi-romper-main_02_720x.jpg?v=1569128637"
-                alt=""
-              />
-              <ProductCollection>Flynn Skye</ProductCollection>
-              <ProductName>Mimi Romper</ProductName>
-              <ProductPrice>$159.00</ProductPrice>
-            </ProductLink>
-          </li>
-
-          <li>
-            <ProductLink as={Link} to="/details">
-              <ProductImage
-                src="https://cdn.shopify.com/s/files/1/0245/6825/products/Mimi-romper-main_02_720x.jpg?v=1569128637"
-                alt=""
-              />
-              <ProductCollection>Flynn Skye</ProductCollection>
-              <ProductName>Mimi Romper</ProductName>
-              <ProductPrice>$159.00</ProductPrice>
-            </ProductLink>
-          </li>
-
-          <li>
-            <ProductLink as={Link} to="/details">
-              <ProductImage
-                src="https://cdn.shopify.com/s/files/1/0245/6825/products/Mimi-romper-main_02_720x.jpg?v=1569128637"
-                alt=""
-              />
-              <ProductCollection>Flynn Skye</ProductCollection>
-              <ProductName>Mimi Romper</ProductName>
-              <ProductPrice>$159.00</ProductPrice>
-            </ProductLink>
-          </li>
+          {shopProducts.map((product) => (
+            <ProductItem key={product.id} {...product} />
+          ))}
         </ProductList>
       </ContextBox>
     </Wrapper>

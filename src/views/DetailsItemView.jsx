@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
 import Tabs from "components/Tabs";
@@ -66,6 +68,10 @@ const ProductName = styled.p`
 const ProductPrice = styled.p`
   text-align: center;
   font-size: 16px;
+
+  @media (min-width: 768px) {
+    text-align: left;
+  }
 `;
 
 const Form = styled.form`
@@ -145,15 +151,38 @@ const AddToCartBtn = styled.button`
 `;
 
 const DetailsItemView = () => {
+  const [currentProduct, setCurrentProduct] = useState({});
+
+  const { id } = useParams();
+
+  const { shopProducts } = useSelector((store) => store);
+
+  useEffect(() => {
+    const element = shopProducts.filter((product) => product.id === Number(id));
+    setCurrentProduct(...element);
+  }, [id, shopProducts]);
+
+  const {
+    collection,
+    composition,
+    description,
+    name,
+    price,
+    srcImg,
+    wash,
+  } = currentProduct;
+
+  const priceFixed = price?.toFixed(2);
+
   return (
     <Wrapper>
       <MainBox>
-        <ProductImg src="https://cdn.shopify.com/s/files/1/0245/6825/products/Mimi-romper-main_02_720x.jpg?v=1569128637" />
+        <ProductImg src={srcImg} />
 
         <ProductDesctoption>
-          <ProductCollection>Show me your Mumu</ProductCollection>
-          <ProductName>Birdie Ruffle Dress</ProductName>
-          <ProductPrice>$140.00</ProductPrice>
+          <ProductCollection>{collection}</ProductCollection>
+          <ProductName>{name}</ProductName>
+          <ProductPrice>$ {priceFixed}</ProductPrice>
           <Form>
             <FormHeading>Size</FormHeading>
             <SizesBox>
@@ -179,7 +208,7 @@ const DetailsItemView = () => {
         </ProductDesctoption>
       </MainBox>
 
-      <Tabs />
+      <Tabs composition={composition} description={description} wash={wash} />
     </Wrapper>
   );
 };

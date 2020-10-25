@@ -21,7 +21,7 @@ function App() {
         {cartIsOpen && <ShoppingCart />}
         <Switch>
           <Route exact path="/" component={MainView} />
-          <Route path="/details/" component={DetailsItemView} />
+          <Route path="/details/:id" component={DetailsItemView} />
         </Switch>
       </div>
     </BrowserRouter>
