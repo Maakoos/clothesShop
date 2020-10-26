@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import arrowForwardIcon from "icons/arrow_forward.svg";
+
+import ShoppingCartItem from "components/ShoppingCartItem";
 
 import { switchShopCart } from "store/Actions";
 
@@ -59,52 +61,6 @@ const CartList = styled.ul`
   padding: 15px 15px 0;
   list-style: none;
 `;
-
-const CartItem = styled.li`
-  display: flex;
-
-  margin-top: 15px;
-  padding-bottom: 25px;
-  border-bottom: 1px solid #d5d5d5;
-`;
-
-const ItemImage = styled.img`
-  width: 80px;
-`;
-
-const ItemContentBox = styled.div`
-  padding: 0 10px;
-  font-size: 14px;
-  font-weight: 600;
-`;
-
-const ItemName = styled.p``;
-
-const ItemPrice = styled.p`
-  margin: 8px 0;
-`;
-
-const QuantityBox = styled.div`
-  display: flex;
-`;
-
-const SubtractionBtn = styled.button`
-  width: 32px;
-  height: 32px;
-  background-color: transparent;
-  border: 1px solid #d5d5d5;
-  cursor: pointer;
-`;
-
-const QuantityInput = styled.input`
-  width: 32px;
-  height: 32px;
-  text-align: center;
-  font-family: inherit;
-  border: 1px solid #d5d5d5;
-`;
-
-const AdditionBtn = styled(SubtractionBtn)``;
 
 const AccoridonsBox = styled.div`
   padding-bottom: 15px;
@@ -202,6 +158,8 @@ const CheckOutButton = styled(Button)`
 `;
 
 const ShoppingCart = () => {
+  const { shopCart } = useSelector((store) => store);
+
   const dispatch = useDispatch();
 
   const handleClickShopCartSwitch = () => dispatch(switchShopCart());
@@ -213,53 +171,9 @@ const ShoppingCart = () => {
         <CloseBtn onClick={handleClickShopCartSwitch}>Close</CloseBtn>
       </CartHeader>
       <CartList>
-        <CartItem>
-          <ItemImage
-            src="https://cdn.shopify.com/s/files/1/0245/6825/products/Mimi-romper-main_02_720x.jpg?v=1569128637"
-            alt=""
-          />
-          <ItemContentBox>
-            <ItemName>Carmel Dree S</ItemName>
-            <ItemPrice>$159.00</ItemPrice>
-            <QuantityBox>
-              <SubtractionBtn>−</SubtractionBtn>
-              <QuantityInput type="number" />
-              <AdditionBtn>+</AdditionBtn>
-            </QuantityBox>
-          </ItemContentBox>
-        </CartItem>
-
-        <CartItem>
-          <ItemImage
-            src="https://cdn.shopify.com/s/files/1/0245/6825/products/Mimi-romper-main_02_720x.jpg?v=1569128637"
-            alt=""
-          />
-          <ItemContentBox>
-            <ItemName>Carmel Dree S</ItemName>
-            <ItemPrice>$159.00</ItemPrice>
-            <QuantityBox>
-              <SubtractionBtn>−</SubtractionBtn>
-              <QuantityInput type="number" />
-              <AdditionBtn>+</AdditionBtn>
-            </QuantityBox>
-          </ItemContentBox>
-        </CartItem>
-
-        <CartItem>
-          <ItemImage
-            src="https://cdn.shopify.com/s/files/1/0245/6825/products/Mimi-romper-main_02_720x.jpg?v=1569128637"
-            alt=""
-          />
-          <ItemContentBox>
-            <ItemName>Carmel Dree S</ItemName>
-            <ItemPrice>$159.00</ItemPrice>
-            <QuantityBox>
-              <SubtractionBtn>−</SubtractionBtn>
-              <QuantityInput type="number" />
-              <AdditionBtn>+</AdditionBtn>
-            </QuantityBox>
-          </ItemContentBox>
-        </CartItem>
+        {shopCart.map((product) => (
+          <ShoppingCartItem key={product.id} {...product} />
+        ))}
       </CartList>
 
       <AccoridonsBox>

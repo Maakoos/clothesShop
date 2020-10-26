@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
 import Tabs from "components/Tabs";
+
+import { addProductToCart } from "store/Actions";
 
 const Wrapper = styled.main`
   margin: 30px auto 0;
@@ -152,15 +154,13 @@ const AddToCartBtn = styled.button`
 
 const DetailsItemView = () => {
   const [currentProduct, setCurrentProduct] = useState({});
+  const [quantityInputValue, setQuantityInputValue] = useState(1);
+  const [sizeValue, setSizeValue] = useState("");
 
   const { id } = useParams();
 
   const { shopProducts } = useSelector((store) => store);
-
-  useEffect(() => {
-    const element = shopProducts.filter((product) => product.id === Number(id));
-    setCurrentProduct(...element);
-  }, [id, shopProducts]);
+  const dispatch = useDispatch();
 
   const {
     collection,
@@ -174,6 +174,41 @@ const DetailsItemView = () => {
 
   const priceFixed = price?.toFixed(2);
 
+  const handleAdditionQuantityValue = (e) => {
+    e.preventDefault();
+    setQuantityInputValue((prevValue) => prevValue + 1);
+  };
+
+  const handleSubtractionQuantityValue = (e) => {
+    e.preventDefault();
+    setQuantityInputValue((prevValue) => prevValue - 1);
+  };
+
+  const handleOnChangeQuantityInput = (e) =>
+    setQuantityInputValue(e.target.value);
+
+  const handleOnChangeSize = (e) => setSizeValue(e.target.value);
+
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    if (!sizeValue) {
+      alert("Please choose size");
+      return;
+    }
+    dispatch(
+      addProductToCart(quantityInputValue, sizeValue, {
+        name,
+        price,
+        srcImg,
+      })
+    );
+  };
+
+  useEffect(() => {
+    const element = shopProducts.filter((product) => product.id === Number(id));
+    setCurrentProduct(...element);
+  }, [id, shopProducts]);
+
   return (
     <Wrapper>
       <MainBox>
@@ -183,27 +218,51 @@ const DetailsItemView = () => {
           <ProductCollection>{collection}</ProductCollection>
           <ProductName>{name}</ProductName>
           <ProductPrice>$ {priceFixed}</ProductPrice>
-          <Form>
+          <Form onSubmit={handleOnSubmit}>
             <FormHeading>Size</FormHeading>
             <SizesBox>
-              <SizeInput type="radio" id="size_S" name="size" />
+              <SizeInput
+                type="radio"
+                id="size_S"
+                name="size"
+                value="S"
+                onChange={handleOnChangeSize}
+              />
               <SizeLabel htmlFor="size_S">S</SizeLabel>
 
-              <SizeInput type="radio" id="size_M" name="size" />
+              <SizeInput
+                type="radio"
+                id="size_M"
+                name="size"
+                value="M"
+                onChange={handleOnChangeSize}
+              />
               <SizeLabel htmlFor="size_M">M</SizeLabel>
 
-              <SizeInput type="radio" id="size_L" name="size" />
+              <SizeInput
+                type="radio"
+                id="size_L"
+                name="size"
+                value="L"
+                onChange={handleOnChangeSize}
+              />
               <SizeLabel htmlFor="size_L">L</SizeLabel>
             </SizesBox>
 
             <FormHeading>Quantity</FormHeading>
             <QuantityBox>
-              <SubtractionBtn>−</SubtractionBtn>
-              <QuantityInput type="number" />
-              <AdditionBtn>+</AdditionBtn>
+              <SubtractionBtn onClick={handleSubtractionQuantityValue}>
+                −
+              </SubtractionBtn>
+              <QuantityInput
+                type="number"
+                value={quantityInputValue}
+                onChange={handleOnChangeQuantityInput}
+              />
+              <AdditionBtn onClick={handleAdditionQuantityValue}>+</AdditionBtn>
             </QuantityBox>
 
-            <AddToCartBtn>Add to Cart</AddToCartBtn>
+            <AddToCartBtn type="submit">Add to Cart</AddToCartBtn>
           </Form>
         </ProductDesctoption>
       </MainBox>

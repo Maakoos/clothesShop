@@ -1,7 +1,12 @@
-import { SWITCH_SHOP_CART } from "store/Actions";
+import {
+  SWITCH_SHOP_CART,
+  ADD_PRODUCT_TO_CART,
+  DELETE_PRODUCT_FROM_CART,
+} from "store/Actions";
 
 const initialState = {
   cartIsOpen: false,
+  shopCart: [],
   shopProducts: [
     {
       id: 1,
@@ -81,8 +86,17 @@ const initialState = {
 const RootReducer = (state = initialState, action) => {
   switch (action.type) {
     case SWITCH_SHOP_CART:
-      state.cartIsOpen = !state.cartIsOpen;
-      return { ...state };
+      return { ...state, cartIsOpen: !state.cartIsOpen };
+    case ADD_PRODUCT_TO_CART:
+      const addedProduct = action.payload;
+      return { ...state, shopCart: [...state.shopCart, addedProduct] };
+    case DELETE_PRODUCT_FROM_CART:
+      return {
+        ...state,
+        shopCart: [
+          ...state.shopCart.filter((item) => item.id !== action.payload.id),
+        ],
+      };
     default:
       return state;
   }
