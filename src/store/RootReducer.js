@@ -2,6 +2,7 @@ import {
   SWITCH_SHOP_CART,
   ADD_PRODUCT_TO_CART,
   DELETE_PRODUCT_FROM_CART,
+  EDIT_QUANTITY_VALUE,
 } from "store/Actions";
 
 const initialState = {
@@ -96,6 +97,23 @@ const RootReducer = (state = initialState, action) => {
         shopCart: [
           ...state.shopCart.filter((item) => item.id !== action.payload.id),
         ],
+      };
+    case EDIT_QUANTITY_VALUE:
+      const newState = state;
+      const index = newState.shopCart.findIndex(
+        (el) => el.id === action.payload.id
+      );
+      const editedItem = newState.shopCart.splice(index, 1);
+      if (action.payload.operation === "adding") {
+        editedItem[0].quantity++;
+      } else {
+        editedItem[0].quantity--;
+      }
+      newState.shopCart.splice(index, 0, ...editedItem);
+
+      return {
+        ...state,
+        shopCart: [...newState.shopCart],
       };
     default:
       return state;

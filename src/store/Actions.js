@@ -1,6 +1,7 @@
 export const SWITCH_SHOP_CART = "SWITCH_SHOP_CART";
 export const ADD_PRODUCT_TO_CART = "ADD_PRODUCT_TO_CART";
 export const DELETE_PRODUCT_FROM_CART = "DELETE_PRODUCT_FROM_CART";
+export const EDIT_QUANTITY_VALUE = "EDIT_QUANTITY_VALUE";
 
 export const switchShopCart = () => {
   return {
@@ -25,6 +26,16 @@ export const deleteProductFromCart = (id) => {
     type: DELETE_PRODUCT_FROM_CART,
     payload: {
       id,
+    },
+  };
+};
+
+export const editQuantityValue = (id, operation) => {
+  return {
+    type: EDIT_QUANTITY_VALUE,
+    payload: {
+      id,
+      operation,
     },
   };
 };

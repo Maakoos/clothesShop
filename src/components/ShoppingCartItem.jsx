@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import removeItemIcon from "icons/delete.svg";
 
-import { deleteProductFromCart } from "store/Actions";
+import { deleteProductFromCart, editQuantityValue } from "store/Actions";
 
 const CartItem = styled.li`
   display: flex;
@@ -75,11 +75,13 @@ const ShoppingCartItem = ({
   const handleAdditionQuantityValue = (e) => {
     e.preventDefault();
     setQuantityInputValue((prevValue) => prevValue + 1);
+    dispatch(editQuantityValue(id, "adding"));
   };
 
   const handleSubtractionQuantityValue = (e) => {
     e.preventDefault();
     setQuantityInputValue((prevValue) => prevValue - 1);
+    dispatch(editQuantityValue(id, "substraction"));
   };
 
   const handleOnChangeQuantityInput = (e) =>
