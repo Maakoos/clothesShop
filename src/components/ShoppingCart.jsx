@@ -164,6 +164,16 @@ const ShoppingCart = () => {
 
   const handleClickShopCartSwitch = () => dispatch(switchShopCart());
 
+  const itemsPrice = shopCart.map(
+    (item) => item.productDetails.price * item.quantity
+  );
+
+  const showTotalPrice =
+    itemsPrice.length &&
+    itemsPrice.reduce((prev = 0, curr) => {
+      return prev + curr;
+    });
+
   return (
     <Wrapper>
       <CartHeader>
@@ -189,7 +199,7 @@ const ShoppingCart = () => {
 
       <TotalPriceBox>
         <TotalPriceTitle>Total</TotalPriceTitle>
-        <TotalPriceValue>$159.00</TotalPriceValue>
+        <TotalPriceValue>${showTotalPrice.toFixed(2)}</TotalPriceValue>
       </TotalPriceBox>
 
       <Button>Continue Shopping</Button>
