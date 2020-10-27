@@ -9,8 +9,21 @@ const ProductLink = styled.a`
 `;
 
 const ProductImage = styled.img`
+  display: block;
   margin-bottom: 10px;
   width: 100%;
+  transition: opacity 0.3s ease-in;
+`;
+
+const ImageBox = styled.div`
+  background-image: url(${(props) => props.backgroundImg});
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  &:hover ${ProductImage} {
+    opacity: 0;
+  }
 `;
 
 const ProductCollection = styled.p`
@@ -25,13 +38,18 @@ const ProductPrice = styled.p`
   font-weight: 800;
 `;
 
-const ProductItem = ({ collection, id, name, price, srcImg }) => {
+const ProductItem = ({ collection, id, name, price, images }) => {
   const priceFixed = price.toFixed(2);
+
+  const mainImg = images[0];
+  const backgroundImg = images[1];
 
   return (
     <li>
       <ProductLink as={Link} to={`/details/${id}`}>
-        <ProductImage src={srcImg} alt="" />
+        <ImageBox backgroundImg={backgroundImg}>
+          <ProductImage src={mainImg} alt="" />
+        </ImageBox>
         <ProductCollection>{collection}</ProductCollection>
         <ProductName>{name}</ProductName>
         <ProductPrice>$ {priceFixed}</ProductPrice>

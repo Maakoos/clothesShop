@@ -11,8 +11,6 @@ const initialState = {
   shopProducts: [
     {
       id: 1,
-      srcImg:
-        "https://cdn.shopify.com/s/files/1/0245/6825/products/Mimi-romper-main_02_720x.jpg?v=1569128637",
       collection: "Flynn Skye",
       name: "Mimi Romper",
       price: 159,
@@ -20,11 +18,15 @@ const initialState = {
         "This girly and flirty romper from Flynn Skye features the brand's signature floral print throughout, scoop neckline with ruffled hem and keyhole detail, and ruffled shorts. The perfect piece for a day date!",
       wash: "Dry Clean Only",
       composition: "100% Rayon",
+      images: [
+        "https://cdn.shopify.com/s/files/1/0245/6825/products/Mimi-romper-main_02_720x.jpg?v=1569128637",
+        "https://cdn.shopify.com/s/files/1/0245/6825/products/Mimi-romper-front-1_02_900x.jpg?v=1569128637",
+        "https://cdn.shopify.com/s/files/1/0245/6825/products/Mimi-romper-front_02_900x.jpg?v=1569128637",
+        "https://cdn.shopify.com/s/files/1/0245/6825/products/Mimi-romper-back_02_900x.jpg?v=1569128637",
+      ],
     },
     {
       id: 2,
-      srcImg:
-        "https://cdn.shopify.com/s/files/1/0245/6825/products/rockstar-romper-main_02_720x.jpg?v=1569128639",
       collection: "Blue Life",
       name: "Rockstar Romper",
       price: 159,
@@ -32,11 +34,15 @@ const initialState = {
         "Blue Life's new Rockstar Romper features a wrap front, flare sleeves with cascading ruffles and cutout shoulders, and a thick smocked waist with a layered skirt over shorts.",
       wash: "Dry Clean Only",
       composition: "100% Rayon",
+      images: [
+        "https://cdn.shopify.com/s/files/1/0245/6825/products/rockstar-romper-main_02_720x.jpg?v=1569128639",
+        "https://cdn.shopify.com/s/files/1/0245/6825/products/rockstar-romper-front_02_900x.jpg?v=1569128639",
+        "https://cdn.shopify.com/s/files/1/0245/6825/products/rockstar-romper-side_02_900x.jpg?v=1569128639",
+        "https://cdn.shopify.com/s/files/1/0245/6825/products/rockstar-romper-back_02_900x.jpg?v=1569128639",
+      ],
     },
     {
       id: 3,
-      srcImg:
-        "https://cdn.shopify.com/s/files/1/0245/6825/products/one-heart-main_02_720x.jpg?v=1569129509",
       collection: "Chaser",
       name: "One Heart Rainbow Tank",
       price: 59,
@@ -44,11 +50,15 @@ const initialState = {
         "His retro tank from Chaser features a cotton burnout fabrication, colorful screen print graphic on the front, and crew neck tank top styling.",
       wash: "Machine Washable",
       composition: "100% Cotton",
+      images: [
+        "https://cdn.shopify.com/s/files/1/0245/6825/products/one-heart-main_02_720x.jpg?v=1569129509",
+        "https://cdn.shopify.com/s/files/1/0245/6825/products/one-heart-front_02_900x.jpg?v=1569129509",
+        "https://cdn.shopify.com/s/files/1/0245/6825/products/one-heart-back_02_900x.jpg?v=1569129509",
+        "https://cdn.shopify.com/s/files/1/0245/6825/products/one-heart-side_02_900x.jpg?v=1569129509",
+      ],
     },
     {
       id: 4,
-      srcImg:
-        "https://cdn.shopify.com/s/files/1/0245/6825/products/cropped-varsity-sweater_02_720x.jpg?v=1569129558",
       collection: "Chaser",
       name: "Cropped Varsity Sweater",
       price: 136,
@@ -56,11 +66,15 @@ const initialState = {
         "Cropped Varsity Sweater features a soft knit fabrication, an allover palm print, and a cropped relaxed fit.",
       wash: "Machine Washable",
       composition: "100% Polyester",
+      images: [
+        "https://cdn.shopify.com/s/files/1/0245/6825/products/cropped-varsity-sweater_02_720x.jpg?v=1569129558",
+        "https://cdn.shopify.com/s/files/1/0245/6825/products/cropped-varsity-sweater-side_02_900x.jpg?v=1569129558",
+        "https://cdn.shopify.com/s/files/1/0245/6825/products/cropped-varsity-sweater-front_02_900x.jpg?v=1569129558",
+        "https://cdn.shopify.com/s/files/1/0245/6825/products/cropped-varsity-sweater-back_02_900x.jpg?v=1569129558",
+      ],
     },
     {
       id: 5,
-      srcImg:
-        "https://cdn.shopify.com/s/files/1/0245/6825/products/daphne-dress-main_02_720x.jpg?v=1569129558",
       collection: "Show me your Mumu",
       name: "Daphne Dress",
       price: 162,
@@ -68,11 +82,15 @@ const initialState = {
         "This fun and festive dress from Show Me Your Mumu features a stretch elastane fabrication with metallic thread contrast, mini swing skirt, and ruffled overlay neckline.",
       wash: "Dry Clean Only",
       composition: "87% Poly 7% Metallic 6% Elastane",
+      images: [
+        "https://cdn.shopify.com/s/files/1/0245/6825/products/daphne-dress-main_02_720x.jpg?v=1569129558",
+        "https://cdn.shopify.com/s/files/1/0245/6825/products/daphne-dress-front_02_900x.jpg?v=1569129558",
+        "https://cdn.shopify.com/s/files/1/0245/6825/products/daphne-dress-side_02_900x.jpg?v=1569129558",
+        "https://cdn.shopify.com/s/files/1/0245/6825/products/daphne-dress-back_02_900x.jpg?v=1569129558",
+      ],
     },
     {
       id: 6,
-      srcImg:
-        "https://cdn.shopify.com/s/files/1/0245/6825/products/off-shoulder-smocked-dress-main_02_720x.jpg?v=1569129511",
       collection: "Blue Life",
       name: "Off Shoulder Smocking Dress",
       price: 150,
@@ -80,6 +98,12 @@ const initialState = {
         "Blue Life's features an allover tie dye print on a super soft rayon fabrication, smocked bodice, and off the shoulder bell sleeves.",
       wash: "Dry Clean Only",
       composition: "87% Poly 7% Metallic 6% Elastane",
+      images: [
+        "https://cdn.shopify.com/s/files/1/0245/6825/products/off-shoulder-smocked-dress-main_02_720x.jpg?v=1569129511",
+        "https://cdn.shopify.com/s/files/1/0245/6825/products/off-should-smocked-dress-front_02_900x.jpg?v=1569129511",
+        "https://cdn.shopify.com/s/files/1/0245/6825/products/off-shoulder-smocked-dress-back_02_900x.jpg?v=1569129511",
+        "https://cdn.shopify.com/s/files/1/0245/6825/products/off-shoulder-smocked-dress-side_02_900x.jpg?v=1569129511",
+      ],
     },
   ],
 };

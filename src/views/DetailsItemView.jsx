@@ -168,9 +168,11 @@ const DetailsItemView = () => {
     description,
     name,
     price,
-    srcImg,
+    images,
     wash,
   } = currentProduct;
+
+  const mainImg = images && images[0];
 
   const priceFixed = price?.toFixed(2);
 
@@ -199,7 +201,7 @@ const DetailsItemView = () => {
       addProductToCart(quantityInputValue, sizeValue, {
         name,
         price,
-        srcImg,
+        mainImg,
       })
     );
   };
@@ -212,7 +214,7 @@ const DetailsItemView = () => {
   return (
     <Wrapper>
       <MainBox>
-        <ProductImg src={srcImg} />
+        <ProductImg src={mainImg} />
 
         <ProductDesctoption>
           <ProductCollection>{collection}</ProductCollection>

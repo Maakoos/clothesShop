@@ -64,7 +64,7 @@ const ShoppingCartItem = ({
   id,
   quantity,
   size,
-  productDetails: { name, price, srcImg },
+  productDetails: { name, price, mainImg },
 }) => {
   const [quantityInputValue, setQuantityInputValue] = useState(quantity);
 
@@ -91,7 +91,7 @@ const ShoppingCartItem = ({
 
   return (
     <CartItem>
-      <ItemImage src={srcImg} alt="" />
+      <ItemImage src={mainImg} alt="" />
       <ItemContentBox>
         <ItemName>
           {name} {size}
