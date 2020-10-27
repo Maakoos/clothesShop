@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 
 import arrowForwardIcon from "icons/arrow_forward.svg";
@@ -20,14 +20,18 @@ const Wrapper = styled.aside`
   border: 1px solid #d5d5d5;
   overflow-y: scroll;
 
-  &::after {
-    content: "";
-    display: block;
-    margin-top: 40px;
-    width: 100%;
-    height: 1px;
-    background-color: #d5d5d5;
-  }
+  ${({ isEmpty }) =>
+    isEmpty &&
+    css`
+      &::after {
+        content: "";
+        display: block;
+        margin-top: 40px;
+        width: 100%;
+        height: 1px;
+        background-color: #d5d5d5;
+      }
+    `}
 
   @media (min-width: 1200px) {
     overflow-y: hidden;
@@ -157,6 +161,10 @@ const CheckOutButton = styled(Button)`
   }
 `;
 
+const EmptyCartMessage = styled.p`
+  margin-top: 20px;
+`;
+
 const ShoppingCart = () => {
   const { shopCart } = useSelector((store) => store);
 
@@ -175,35 +183,39 @@ const ShoppingCart = () => {
     });
 
   return (
-    <Wrapper>
+    <Wrapper isEmpty={Boolean(shopCart.length)}>
       <CartHeader>
         <Heading>My Cart</Heading>
         <CloseBtn onClick={handleClickShopCartSwitch}>Close</CloseBtn>
       </CartHeader>
-      <CartList>
-        {shopCart.map((product) => (
-          <ShoppingCartItem key={product.id} {...product} />
-        ))}
-      </CartList>
-
-      <AccoridonsBox>
-        <AditionalRemarks>
-          <TitleAccordion>Order Special Instructions</TitleAccordion>
-          <AditionalMessage />
-        </AditionalRemarks>
-        <AditionalRemarks>
-          <TitleAccordion>Discount Code</TitleAccordion>
-          <CodeInput type="text" placeholder="Enter Coupon Code" />
-        </AditionalRemarks>
-      </AccoridonsBox>
-
-      <TotalPriceBox>
-        <TotalPriceTitle>Total</TotalPriceTitle>
-        <TotalPriceValue>${showTotalPrice.toFixed(2)}</TotalPriceValue>
-      </TotalPriceBox>
-
-      <Button>Continue Shopping</Button>
-      <CheckOutButton>Check Out</CheckOutButton>
+      {shopCart.length ? (
+        <>
+          {" "}
+          <CartList>
+            {shopCart.map((product) => (
+              <ShoppingCartItem key={product.id} {...product} />
+            ))}
+          </CartList>
+          <AccoridonsBox>
+            <AditionalRemarks>
+              <TitleAccordion>Order Special Instructions</TitleAccordion>
+              <AditionalMessage />
+            </AditionalRemarks>
+            <AditionalRemarks>
+              <TitleAccordion>Discount Code</TitleAccordion>
+              <CodeInput type="text" placeholder="Enter Coupon Code" />
+            </AditionalRemarks>
+          </AccoridonsBox>
+          <TotalPriceBox>
+            <TotalPriceTitle>Total</TotalPriceTitle>
+            <TotalPriceValue>${showTotalPrice.toFixed(2)}</TotalPriceValue>
+          </TotalPriceBox>
+          <Button>Continue Shopping</Button>
+          <CheckOutButton>Check Out</CheckOutButton>
+        </>
+      ) : (
+        <EmptyCartMessage>Your cart is curently empty.</EmptyCartMessage>
+      )}
     </Wrapper>
   );
 };
