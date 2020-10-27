@@ -70,7 +70,7 @@ const ShoppingCartItem = ({
 
   const dispatch = useDispatch();
 
-  const priceFixed = price.toFixed(2);
+  const itemsPrice = price.toFixed(2) * quantityInputValue;
 
   const handleAdditionQuantityValue = (e) => {
     e.preventDefault();
@@ -96,7 +96,7 @@ const ShoppingCartItem = ({
         <ItemName>
           {name} {size}
         </ItemName>
-        <ItemPrice>${priceFixed}</ItemPrice>
+        <ItemPrice>${itemsPrice}</ItemPrice>
         <QuantityBox>
           <SubtractionBtn onClick={handleSubtractionQuantityValue}>
             −
