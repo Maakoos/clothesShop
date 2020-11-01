@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+
+import arrowIcon from "icons/arrow_down.svg";
 
 import Tabs from "components/Tabs";
 
@@ -44,6 +46,10 @@ const ProductDesctoption = styled.div`
   @media (min-width: 768px) {
     padding: 30px 40px;
   }
+`;
+
+const ImageBox = styled.div`
+  position: relative;
 `;
 
 const ProductImg = styled.img`
@@ -152,10 +158,34 @@ const AddToCartBtn = styled.button`
   cursor: pointer;
 `;
 
+const NextImgBtn = styled.button`
+  position: absolute;
+  top: 20px;
+  left: 50px;
+  width: 35px;
+  height: 35px;
+  background: transparent;
+  background-image: url(${arrowIcon});
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: none;
+  transform: rotate(-90deg);
+  opacity: 0.3;
+`;
+
+const PrevImgBtn = styled(NextImgBtn)`
+  left: 10px;
+  transform: rotate(90deg);
+`;
+
 const DetailsItemView = () => {
+  let imageIndex = 0;
+
   const [currentProduct, setCurrentProduct] = useState({});
   const [quantityInputValue, setQuantityInputValue] = useState(1);
   const [sizeValue, setSizeValue] = useState("");
+
+  const imageRef = useRef();
 
   const { id } = useParams();
 
@@ -206,6 +236,18 @@ const DetailsItemView = () => {
     );
   };
 
+  const handleNextImage = () => {
+    if (imageIndex === images.length - 1) imageIndex = -1;
+    imageIndex++;
+    imageRef.current.src = images[imageIndex];
+  };
+
+  const handlePrevImage = () => {
+    if (imageIndex === 0) imageIndex = images.length;
+    imageIndex--;
+    imageRef.current.src = images[imageIndex];
+  };
+
   useEffect(() => {
     const element = shopProducts.filter((product) => product.id === Number(id));
     setCurrentProduct(...element);
@@ -214,7 +256,11 @@ const DetailsItemView = () => {
   return (
     <Wrapper>
       <MainBox>
-        <ProductImg src={mainImg} />
+        <ImageBox>
+          <ProductImg src={mainImg} ref={imageRef} />
+          <PrevImgBtn onClick={handlePrevImage} />
+          <NextImgBtn onClick={handleNextImage} />
+        </ImageBox>
 
         <ProductDesctoption>
           <ProductCollection>{collection}</ProductCollection>
