@@ -171,6 +171,7 @@ const NextImgBtn = styled.button`
   border: none;
   transform: rotate(-90deg);
   opacity: 0.3;
+  cursor: pointer;
 `;
 
 const PrevImgBtn = styled(NextImgBtn)`
@@ -213,6 +214,7 @@ const DetailsItemView = () => {
 
   const handleSubtractionQuantityValue = (e) => {
     e.preventDefault();
+    if (quantityInputValue === 1) return;
     setQuantityInputValue((prevValue) => prevValue - 1);
   };
 

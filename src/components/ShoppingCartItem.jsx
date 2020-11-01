@@ -80,6 +80,7 @@ const ShoppingCartItem = ({
 
   const handleSubtractionQuantityValue = (e) => {
     e.preventDefault();
+    if (quantityInputValue === 1) return;
     setQuantityInputValue((prevValue) => prevValue - 1);
     dispatch(editQuantityValue(id, "substraction"));
   };
