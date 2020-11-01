@@ -134,9 +134,11 @@ const ProductPrice = styled.p`
 `; */
 
 const ShopBox = () => {
-  const [openSelectList, setOpenSelectList] = useState(false);
-
   const { shopProducts } = useSelector((store) => store);
+
+  const [openSelectList, setOpenSelectList] = useState(false);
+  const [products, setProducts] = useState(shopProducts);
+  const [headingValue, setHeadingValue] = useState("New Arrivals");
 
   const selectListRef = useRef();
   const selectButtonRef = useRef();
@@ -144,11 +146,31 @@ const ShopBox = () => {
   const handleOpenSelectList = () =>
     setOpenSelectList((prevValue) => !prevValue);
 
+  const filterItems = (collection) => {
+    if (collection === "All") {
+      setProducts(shopProducts);
+      setHeadingValue("New Arrivals");
+      setOpenSelectList(false);
+      return;
+    }
+    const filteredItems = shopProducts.filter(
+      (product) => product.collection === collection
+    );
+    setProducts(filteredItems);
+    setHeadingValue(collection);
+    setOpenSelectList(false);
+  };
+
   const showSelectOptionList = openSelectList && (
     <SelectOptionList ref={selectListRef}>
-      <SelectOption>Nike</SelectOption>
-      <SelectOption>Adidas</SelectOption>
-      <SelectOption>Adidas</SelectOption>
+      <SelectOption onClick={() => filterItems("All")}>All</SelectOption>
+      <SelectOption onClick={() => filterItems("Chaser")}>Chaser</SelectOption>
+      <SelectOption onClick={() => filterItems("Blue Life")}>
+        Blue Life
+      </SelectOption>
+      <SelectOption onClick={() => filterItems("Show me your Mumu")}>
+        Mumu
+      </SelectOption>
     </SelectOptionList>
   );
 
@@ -171,7 +193,7 @@ const ShopBox = () => {
 
   return (
     <Wrapper>
-      <Heading>New Arrivals</Heading>
+      <Heading>{headingValue}</Heading>
 
       <ContextBox>
         <SelectBox>
@@ -182,7 +204,7 @@ const ShopBox = () => {
         </SelectBox>
 
         <ProductList>
-          {shopProducts.map((product) => (
+          {products.map((product) => (
             <ProductItem key={product.id} {...product} />
           ))}
         </ProductList>
