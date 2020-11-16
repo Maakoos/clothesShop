@@ -1,4 +1,5 @@
 export const SWITCH_SHOP_CART = "SWITCH_SHOP_CART";
+export const OPEN_SHOP_CART = "OPEN_SHOP_CART ";
 export const ADD_PRODUCT_TO_CART = "ADD_PRODUCT_TO_CART";
 export const DELETE_PRODUCT_FROM_CART = "DELETE_PRODUCT_FROM_CART";
 export const EDIT_QUANTITY_VALUE = "EDIT_QUANTITY_VALUE";
@@ -6,6 +7,12 @@ export const EDIT_QUANTITY_VALUE = "EDIT_QUANTITY_VALUE";
 export const switchShopCart = () => {
   return {
     type: SWITCH_SHOP_CART,
+  };
+};
+
+export const openShopCart = () => {
+  return {
+    type: OPEN_SHOP_CART,
   };
 };
 

@@ -7,7 +7,7 @@ import arrowIcon from "icons/arrow_down.svg";
 
 import Tabs from "components/Tabs";
 
-import { addProductToCart } from "store/Actions";
+import { addProductToCart, openShopCart } from "store/Actions";
 
 const Wrapper = styled.main`
   margin: 30px auto 0;
@@ -236,6 +236,7 @@ const DetailsItemView = () => {
         mainImg,
       })
     );
+    dispatch(openShopCart());
   };
 
   const handleNextImage = () => {

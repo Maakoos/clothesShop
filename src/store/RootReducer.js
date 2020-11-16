@@ -1,5 +1,6 @@
 import {
   SWITCH_SHOP_CART,
+  OPEN_SHOP_CART,
   ADD_PRODUCT_TO_CART,
   DELETE_PRODUCT_FROM_CART,
   EDIT_QUANTITY_VALUE,
@@ -112,7 +113,24 @@ const RootReducer = (state = initialState, action) => {
   switch (action.type) {
     case SWITCH_SHOP_CART:
       return { ...state, cartIsOpen: !state.cartIsOpen };
+    case OPEN_SHOP_CART:
+      return { ...state, cartIsOpen: true };
     case ADD_PRODUCT_TO_CART:
+      const thisSameItem = state.shopCart.filter(
+        (item) =>
+          item.productDetails.name === action.payload.productDetails.name &&
+          item.size === action.payload.size
+      );
+
+      let haveThisItemInCart = state.shopCart.filter(
+        (item) => item.id === thisSameItem[0]?.id
+      );
+
+      if (haveThisItemInCart.length) {
+        alert("You already have such a product in your shop cart");
+        return { ...state };
+      }
+
       const addedProduct = action.payload;
       return { ...state, shopCart: [...state.shopCart, addedProduct] };
     case DELETE_PRODUCT_FROM_CART:
