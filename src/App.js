@@ -6,10 +6,11 @@ import styled, { css } from "styled-components";
 import GlobalStyle from "styles/GlobalStyle";
 
 import Header from "components/Header";
-import MainView from "views/MainView";
 import ShoppingCart from "components/ShoppingCart";
 
+import MainView from "views/MainView";
 import DetailsItemView from "views/DetailsItemView";
+import SearchListView from "views/SearchListView";
 
 const AppWrapper = styled.div`
   transition: transform 0.2s ease-in;
@@ -33,6 +34,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={MainView} />
           <Route path="/details/:id" component={DetailsItemView} />
+          <Route path="/search" component={SearchListView} />
         </Switch>
       </AppWrapper>
       {cartIsOpen && <ShoppingCart />}

@@ -3,6 +3,7 @@ export const OPEN_SHOP_CART = "OPEN_SHOP_CART ";
 export const ADD_PRODUCT_TO_CART = "ADD_PRODUCT_TO_CART";
 export const DELETE_PRODUCT_FROM_CART = "DELETE_PRODUCT_FROM_CART";
 export const EDIT_QUANTITY_VALUE = "EDIT_QUANTITY_VALUE";
+export const SEARCH_PRODUCT = "SEARCH_PRODUCT";
 
 export const switchShopCart = () => {
   return {
@@ -43,6 +44,15 @@ export const editQuantityValue = (id, operation) => {
     payload: {
       id,
       operation,
+    },
+  };
+};
+
+export const searchProduct = (productName) => {
+  return {
+    type: SEARCH_PRODUCT,
+    payload: {
+      productName,
     },
   };
 };

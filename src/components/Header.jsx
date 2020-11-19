@@ -1,18 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useHistory, useLocation } from "react-router-dom";
 
 import sprite from "icons/sprite.svg";
 import logoImg from "img/logo.png";
 
-import { switchShopCart } from "store/Actions";
+import { switchShopCart, searchProduct } from "store/Actions";
 
 const Wrapper = styled.header`
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
 const TopBox = styled.div`
+  align-self: stretch;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -60,13 +63,9 @@ const CartBtn = styled.button`
 `;
 
 const MobileLogo = styled.img`
-  margin: 10px auto;
-  width: 70%;
-  max-width: 400px;
-
-  @media (min-width: 980px) {
-    max-width: 210px;
-  }
+  margin: 10px 0;
+  width: 100%;
+  max-width: 280px;
 `;
 
 const Form = styled.form`
@@ -98,39 +97,61 @@ const InputLabel = styled.label`
 `;
 
 const Header = () => {
-  const test = useSelector((store) => store);
+  const [inputValue, setInputValue] = useState("");
+
+  const { shopCart } = useSelector((store) => store);
 
   const dispatch = useDispatch();
 
+  const history = useHistory();
+  const location = useLocation();
+
+  const handleOnChange = (e) => setInputValue(e.target.value);
+
   const handleClickShopCartSwitch = () => dispatch(switchShopCart());
+
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    dispatch(searchProduct(inputValue));
+    history.push("/search");
+    setInputValue("");
+  };
+
+  const renderSearchBar =
+    location.pathname !== "/search" ? (
+      <Form action="submit" onSubmit={handleOnSubmit}>
+        <InputLabel htmlFor="searchInput">
+          <Icon>
+            <use href={`${sprite}#search-24px`} />
+          </Icon>
+        </InputLabel>
+        <SearchInput
+          type="text"
+          id="searchInput"
+          placeholder="Search"
+          value={inputValue}
+          onChange={handleOnChange}
+        />
+      </Form>
+    ) : null;
+
   return (
     <Wrapper>
       <TopBox>
-        <Form action="submit">
-          <InputLabel htmlFor="searchInput">
-            <Icon>
-              <use href={`${sprite}#search-24px`} />
-            </Icon>
-          </InputLabel>
-          <SearchInput type="text" id="searchInput" placeholder="Search" />
-        </Form>
+        {renderSearchBar}
         <DeliveryInfo>Free delivery on orders over $60</DeliveryInfo>
         <CartBtn onClick={handleClickShopCartSwitch}>
           <Icon>
             <use href={`${sprite}#shopping_cart-24px`} />
           </Icon>
-          0
+          {shopCart.length}
         </CartBtn>
       </TopBox>
-      <MobileLogo src={logoImg} />
+      <Link to="/">
+        <MobileLogo src={logoImg} />
+      </Link>
     </Wrapper>
   );
 };
-
-/* const mapStateToProps = (state) => {
-  const { cartIsOpen } = state;
-  console.log(cartIsOpen);
-  return { cartIsOpen };
-}; */
 
 export default Header;

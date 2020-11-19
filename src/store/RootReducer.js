@@ -4,11 +4,14 @@ import {
   ADD_PRODUCT_TO_CART,
   DELETE_PRODUCT_FROM_CART,
   EDIT_QUANTITY_VALUE,
+  SEARCH_PRODUCT,
 } from "store/Actions";
 
 const initialState = {
   cartIsOpen: false,
   shopCart: [],
+  searchProducts: [],
+  searchName: "",
   shopProducts: [
     {
       id: 1,
@@ -156,6 +159,17 @@ const RootReducer = (state = initialState, action) => {
       return {
         ...state,
         shopCart: [...newState.shopCart],
+      };
+    case SEARCH_PRODUCT:
+      const searchItems = state.shopProducts.filter((item) =>
+        item.name
+          .toLowerCase()
+          .includes(action.payload.productName.toLowerCase())
+      );
+      return {
+        ...state,
+        searchProducts: searchItems,
+        searchName: action.payload.productName,
       };
     default:
       return state;
