@@ -3,7 +3,8 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory, useLocation } from "react-router-dom";
 
-import sprite from "icons/sprite.svg";
+import searchIcon from "icons/search.svg";
+import shopingCartIcon from "icons/shopping_cart.svg";
 import logoImg from "img/logo.png";
 
 import { switchShopCart, searchProduct } from "store/Actions";
@@ -36,15 +37,6 @@ const DeliveryInfo = styled.p`
     margin-right: 177px;
     padding: 10px 0;
     color: #fff;
-  }
-`;
-
-const Icon = styled.svg`
-  width: 100%;
-  height: 100%;
-
-  @media (min-width: 980px) {
-    fill: #fff;
   }
 `;
 
@@ -94,6 +86,10 @@ const InputLabel = styled.label`
   display: inline-block;
   width: 25px;
   height: 25px;
+  background-image: url(${searchIcon});
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
 `;
 
 const Header = () => {
@@ -120,11 +116,7 @@ const Header = () => {
   const renderSearchBar =
     location.pathname !== "/search" ? (
       <Form action="submit" onSubmit={handleOnSubmit}>
-        <InputLabel htmlFor="searchInput">
-          <Icon>
-            <use href={`${sprite}#search-24px`} />
-          </Icon>
-        </InputLabel>
+        <InputLabel htmlFor="searchInput" />
         <SearchInput
           type="text"
           id="searchInput"
@@ -141,9 +133,7 @@ const Header = () => {
         {renderSearchBar}
         <DeliveryInfo>Free delivery on orders over $60</DeliveryInfo>
         <CartBtn onClick={handleClickShopCartSwitch}>
-          <Icon>
-            <use href={`${sprite}#shopping_cart-24px`} />
-          </Icon>
+          <img src={shopingCartIcon} alt="shopping cart icon" />
           {shopCart.length}
         </CartBtn>
       </TopBox>
