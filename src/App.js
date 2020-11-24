@@ -7,6 +7,7 @@ import GlobalStyle from "styles/GlobalStyle";
 
 import Header from "components/Header";
 import ShoppingCart from "components/ShoppingCart";
+import Footer from "components/Footer";
 
 import MainView from "views/MainView";
 import DetailsItemView from "views/DetailsItemView";
@@ -36,6 +37,7 @@ function App() {
           <Route path="/details/:id" component={DetailsItemView} />
           <Route path="/search" component={SearchListView} />
         </Switch>
+        <Footer />
       </AppWrapper>
       {cartIsOpen && <ShoppingCart />}
     </BrowserRouter>
