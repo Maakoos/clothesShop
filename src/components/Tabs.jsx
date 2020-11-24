@@ -19,6 +19,7 @@ const TabName = styled.button`
   border: 1px solid #e4e4e4;
   border-bottom: none;
   cursor: pointer;
+  outline: transparent;
 
   &:nth-of-type(2) {
     border-left: none;
@@ -46,7 +47,6 @@ const TabName = styled.button`
 `;
 
 const TabContent = styled.div`
-  position: absolute;
   padding: 20px;
   width: 100%;
   border: 1px solid #e4e4e4;
@@ -65,12 +65,35 @@ const TabList = styled.ul`
   padding: 20px;
 `;
 
-const TabItem = styled.li``;
-
 const Tabs = ({ composition, description, wash }) => {
   const [tabName, setTabName] = useState("first");
+  const [firstTabIsActive, setFirstTabIsActive] = useState(true);
+  const [secondTabIsActive, setSecondTabIsActive] = useState(false);
+  const [thirdTabIsActive, setThirdTabIsActive] = useState(false);
 
-  const handleSetTabVisible = (name) => setTabName(name);
+  const clearAllTablesActive = () => {
+    setFirstTabIsActive(false);
+    setSecondTabIsActive(false);
+    setThirdTabIsActive(false);
+  };
+
+  const handleSetTabVisible = (name) => {
+    setTabName(name);
+    clearAllTablesActive();
+    switch (name) {
+      case "first":
+        setFirstTabIsActive(true);
+        break;
+      case "second":
+        setSecondTabIsActive(true);
+        break;
+      case "third":
+        setThirdTabIsActive(true);
+        break;
+      default:
+        return null;
+    }
+  };
 
   const whichTabIsVisible = (tabName) => {
     switch (tabName) {
@@ -79,15 +102,13 @@ const Tabs = ({ composition, description, wash }) => {
           <TabContent>
             <TabParagraph>{description}</TabParagraph>
             <TabList>
-              <TabItem>Made in USA</TabItem>
-              <TabItem>{wash}</TabItem>
-              <TabItem>{composition}</TabItem>
-              <TabItem>
-                Model is 5ft 7 inches; Bust: 34”, Waist: 25”, Hips: 36”
-              </TabItem>
-              <TabItem>Model is wearing a size XS</TabItem>
-              <TabItem>Relaxed Fit</TabItem>
-              <TabItem>Shoes Featured Not Available For Purchase</TabItem>
+              <li>Made in USA</li>
+              <li>{wash}</li>
+              <li>{composition}</li>
+              <li>Model is 5ft 7 inches; Bust: 34”, Waist: 25”, Hips: 36”</li>
+              <li>Model is wearing a size XS</li>
+              <li>Relaxed Fit</li>
+              <li>Shoes Featured Not Available For Purchase</li>
             </TabList>
           </TabContent>
         );
@@ -122,11 +143,24 @@ const Tabs = ({ composition, description, wash }) => {
 
   return (
     <TabsBox>
-      <TabName active={true} onClick={() => handleSetTabVisible("first")}>
+      <TabName
+        onClick={() => handleSetTabVisible("first")}
+        active={firstTabIsActive}
+      >
         Details
       </TabName>
-      <TabName onClick={() => handleSetTabVisible("second")}>Delivery</TabName>
-      <TabName onClick={() => handleSetTabVisible("third")}>Returns</TabName>
+      <TabName
+        onClick={() => handleSetTabVisible("second")}
+        active={secondTabIsActive}
+      >
+        Delivery
+      </TabName>
+      <TabName
+        onClick={() => handleSetTabVisible("third")}
+        active={thirdTabIsActive}
+      >
+        Returns
+      </TabName>
       {whichTabIsVisible(tabName)}
     </TabsBox>
   );
