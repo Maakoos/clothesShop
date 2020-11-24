@@ -28,13 +28,25 @@ const ContextBox = styled.section`
   }
 `;
 
+const Aside = styled.aside`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media (min-width: 980px) {
+    align-items: flex-start;
+  }
+`;
+
 const SelectBox = styled.div`
+  align-self: flex-start;
   position: relative;
-  min-width: 140px;
-  max-width: 140px;
+  min-width: 175px;
+  max-width: 175px;
 
   @media (min-width: 768px) {
-    min-width: 175px;
+    min-width: 200px;
+    max-width: 200px;
   }
 
   @media (min-width: 980px) {
@@ -42,11 +54,35 @@ const SelectBox = styled.div`
   }
 `;
 
-const Select = styled.button`
+const SubHeading = styled.h2`
+  margin-top: 30px;
+  padding-bottom: 10px;
+  color: #28323c;
+  font-size: 15px;
+  font-weight: 600;
+  border-bottom: 1px solid #d5d5d5;
+
+  @media (min-width: 980px) {
+    align-self: stretch;
+  }
+`;
+
+const Paragraph = styled.p`
+  margin: 15px 0;
+  max-width: 380px;
+  font-size: 14px;
+
+  @media (min-width: 980px) {
+    min-width: 320px;
+    max-width: 320px;
+  }
+`;
+
+const SelectBtn = styled.button`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 5px;
+  padding: 10px;
   width: 100%;
   background-color: transparent;
   font-size: 12px;
@@ -110,29 +146,6 @@ const ProductList = styled.ul`
   }
 `;
 
-/* const ProductLink = styled.a`
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-`;
-
-const ProductImage = styled.img`
-  margin-bottom: 10px;
-  width: 100%;
-`;
-
-const ProductCollection = styled.p`
-  font-style: italic;
-`;
-
-const ProductName = styled.p`
-  margin: 7px 0;
-`;
-
-const ProductPrice = styled.p`
-  font-weight: 800;
-`; */
-
 const ShopBox = () => {
   const { shopProducts } = useSelector((store) => store);
 
@@ -194,15 +207,24 @@ const ShopBox = () => {
   return (
     <Wrapper>
       <Heading>{headingValue}</Heading>
-
       <ContextBox>
-        <SelectBox>
-          <Select onClick={handleOpenSelectList} ref={selectButtonRef}>
-            Items by Brands
-          </Select>
-          {showSelectOptionList}
-        </SelectBox>
-
+        <Aside>
+          <SelectBox>
+            <SelectBtn onClick={handleOpenSelectList} ref={selectButtonRef}>
+              Items by Brands
+            </SelectBtn>
+            {showSelectOptionList}
+          </SelectBox>
+          <SubHeading>Satisfaction guaranteed</SubHeading>
+          <Paragraph>
+            All product are backed by our awesome free returns policy. We want
+            to make sure your new item is perfect and fits like a dream...{" "}
+          </Paragraph>
+          <Paragraph>
+            No good? just send it back and we will work with you to find the
+            right size or a replacement.
+          </Paragraph>
+        </Aside>
         <ProductList>
           {products.map((product) => (
             <ProductItem key={product.id} {...product} />
