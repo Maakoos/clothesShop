@@ -124,10 +124,6 @@ const TotalPriceBox = styled.div`
   font-weight: 700;
 `;
 
-const TotalPriceTitle = styled.p``;
-
-const TotalPriceValue = styled.p``;
-
 const Button = styled.button`
   width: 100%;
   height: 45px;
@@ -207,8 +203,8 @@ const ShoppingCart = () => {
             </AditionalRemarks>
           </AccoridonsBox>
           <TotalPriceBox>
-            <TotalPriceTitle>Total</TotalPriceTitle>
-            <TotalPriceValue>${showTotalPrice.toFixed(2)}</TotalPriceValue>
+            <span>Total</span>
+            <span>${showTotalPrice.toFixed(2)}</span>
           </TotalPriceBox>
           <Button>Continue Shopping</Button>
           <CheckOutButton>Check Out</CheckOutButton>

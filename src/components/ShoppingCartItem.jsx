@@ -8,7 +8,6 @@ import { deleteProductFromCart, editQuantityValue } from "store/Actions";
 
 const CartItem = styled.li`
   display: flex;
-
   margin-top: 15px;
   padding-bottom: 25px;
   border-bottom: 1px solid #d5d5d5;
@@ -23,8 +22,6 @@ const ItemContentBox = styled.div`
   font-size: 14px;
   font-weight: 600;
 `;
-
-const ItemName = styled.p``;
 
 const ItemPrice = styled.p`
   margin: 8px 0;
@@ -94,9 +91,9 @@ const ShoppingCartItem = ({
     <CartItem>
       <ItemImage src={mainImg} alt="" />
       <ItemContentBox>
-        <ItemName>
+        <p>
           {name} {size}
-        </ItemName>
+        </p>
         <ItemPrice>${itemsPrice}</ItemPrice>
         <QuantityBox>
           <SubtractionBtn onClick={handleSubtractionQuantityValue}>
