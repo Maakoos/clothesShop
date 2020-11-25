@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { HashRouter, Switch, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 import styled, { css } from "styled-components";
 
@@ -27,7 +27,7 @@ function App() {
   const { cartIsOpen } = useSelector((state) => state);
 
   return (
-    <BrowserRouter>
+    <HashRouter basename="/">
       <AppWrapper className="App" cartIsOpen={cartIsOpen}>
         <GlobalStyle />
         <Header />
@@ -40,7 +40,7 @@ function App() {
         <Footer />
       </AppWrapper>
       {cartIsOpen && <ShoppingCart />}
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
