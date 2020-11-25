@@ -18,23 +18,27 @@ const Wrapper = styled.header`
 const TopBox = styled.div`
   align-self: stretch;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 10px;
+  background-color: #000;
+  color: #fff;
 
   @media (min-width: 980px) {
-    background-color: #000;
-    color: #fff;
+    justify-content: space-between;
   }
 `;
 
 const DeliveryInfo = styled.p`
+  margin-right: auto;
+  margin-left: auto;
   text-align: center;
   font-size: 13px;
   text-transform: uppercase;
 
   @media (min-width: 980px) {
     margin-right: 177px;
+    margin-left: 0;
     padding: 10px 0;
     color: #fff;
   }
@@ -46,12 +50,9 @@ const CartBtn = styled.button`
   width: 25px;
   height: 25px;
   background: transparent;
+  color: #fff;
   border: none;
   cursor: pointer;
-
-  @media (min-width: 980px) {
-    color: #fff;
-  }
 `;
 
 const MobileLogo = styled.img`
