@@ -110,7 +110,12 @@ const SizeLabel = styled.label`
   height: 40px;
   font-weight: 700;
   border: 1px solid #d5d5d5;
+  transition: background-color 0.2s ease;
   cursor: pointer;
+
+  &:hover {
+    background-color: #d5d5d5;
+  }
 `;
 
 const SizeInput = styled.input`
@@ -133,7 +138,12 @@ const SubtractionBtn = styled.button`
   height: 40px;
   background-color: transparent;
   border: 1px solid #d5d5d5;
+  transition: background-color 0.2s ease;
   cursor: pointer;
+
+  &:hover {
+    background-color: #d5d5d5;
+  }
 `;
 
 const QuantityInput = styled.input`
@@ -142,6 +152,14 @@ const QuantityInput = styled.input`
   text-align: center;
   font-family: inherit;
   border: 1px solid #d5d5d5;
+
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+
+  &[type="number"] {
+    -moz-appearance: textfield;
+  }
 `;
 
 const AdditionBtn = styled(SubtractionBtn)``;
@@ -155,7 +173,12 @@ const AddToCartBtn = styled.button`
   font-size: 16px;
   font-family: inherit;
   border: none;
+  transition: background-color 0.2s ease;
   cursor: pointer;
+
+  &:hover {
+    background-color: #bfbfbf;
+  }
 `;
 
 const NextImgBtn = styled.button`
@@ -171,7 +194,12 @@ const NextImgBtn = styled.button`
   border: none;
   transform: rotate(-90deg);
   opacity: 0.3;
+  transition: opacity 0.2s ease;
   cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
 `;
 
 const PrevImgBtn = styled(NextImgBtn)`
@@ -307,6 +335,7 @@ const DetailsItemView = () => {
               </SubtractionBtn>
               <QuantityInput
                 type="number"
+                min="1"
                 value={quantityInputValue}
                 onChange={handleOnChangeQuantityInput}
               />
